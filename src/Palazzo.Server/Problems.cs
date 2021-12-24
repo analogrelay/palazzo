@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Palazzo.Server;
 
-public class Problems
+class Problems
 {
-    static readonly string BaseUrl = "https://palazzo.analogrelay.dev/errors";
+    static readonly string BaseUrl = "https://palazzo.analogrelay.net/errors";
 
     public static ProblemDetails MissingRequiredArgument(string name) =>
         Create(nameof(MissingRequiredArgument), "Missing Required Argument",
