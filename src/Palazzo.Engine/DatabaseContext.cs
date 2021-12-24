@@ -1,12 +1,5 @@
 namespace Palazzo;
 
-public interface IDatabaseContext
-{
-    string Name { get; }
-    string Path { get; }
-    DatabaseSettings Settings { get; }
-}
-
 class DatabaseContext : IDatabaseContext
 {
     public string Name { get; }
@@ -18,5 +11,15 @@ class DatabaseContext : IDatabaseContext
         Name = name;
         Path = path;
         Settings = settings;
+    }
+
+    public Task<ICatalogContext> CreateCatalogAsync(string name, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<ICatalogContext?> GetCatalogAsync(string name, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 }
