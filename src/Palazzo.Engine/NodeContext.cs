@@ -1,8 +1,10 @@
+using System.Data;
 using System.Text.Json;
 
 using Microsoft.Extensions.Options;
 
 using Palazzo.Configuration;
+using Palazzo.Errors;
 using Palazzo.Storage;
 
 namespace Palazzo;
@@ -30,7 +32,9 @@ class NodeContext : INodeContext
 
         if (Directory.Exists(dbDir))
         {
-            throw new InvalidOperationException("A database with that name already exists!");
+            throw new ConflictException(
+                "A database with that name already exists!",
+                "database-already-exists");
         }
 
         Directory.CreateDirectory(dbDir);
@@ -57,7 +61,9 @@ class NodeContext : INodeContext
 
         if (settings is null)
         {
-            throw new FormatException("Database settings file failed to deserialize.");
+            throw new InternalErrorException(
+                "Database settings file failed to deserialize.",
+                "failed-to-deserialize");
         }
 
         return new DatabaseContext(name, dbDir, settings);
